@@ -12,7 +12,7 @@ class Game {
     }
 
     _update() {
-        this.canvas.clear()
+        this.canvas.clearCanvas()
         this.update()
         this.canvas.render()
     }
@@ -25,15 +25,16 @@ class SampleGame extends Game {
      */
     constructor(canvas) {
         super(canvas)
+        this.pixelGroup = new PixelGroup(new Vec2D(0, 0), new Heap(true))
+        this.pixelGroup = this.pixelGroup
+                            .add(new Pixel(new Vec2D(0, 0), new Color("#000000")), 0)
+                            .add(new Pixel(new Vec2D(1, 0), new Color("#000000")), 0)
     }
 
     update() {
         this.canvas.clearPixels()
-
-        for(let i=0; i < 100; i++) {
-            let x = randint(100)
-            let y = randint(100)
-            this.canvas.setPixel(x, y, 10, "#ffffff")
-        }
+        this.canvas.clearPixelGroups()
+        this.pixelGroup = this.pixelGroup.translate(new Vec2D(1, 0))
+        this.canvas.addPixelGroup(this.pixelGroup, 0)
     }
 }

@@ -24,15 +24,24 @@ class Pixel extends Pair {
     }
 }
 
-class DiscreteCanvas {
-    constructor(id, grid_width, grid_height) {
+class Canvas {
+    constructor(id) {
         this.canvas = document.getElementById(id)
         this.ctx = this.canvas.getContext("2d");
+    }
+
+    render() {}
+    clear() {}
+}
+
+class DiscreteCanvas extends Canvas {
+    constructor(id, grid_width, grid_height) {
+        super(id)
         this.grid_width = grid_width
         this.grid_height = grid_height
         this.width = this.canvas.width
         this.height = this.canvas.height
-        this.pixels = new PriorityQueue(true)
+        this.pixels = new Heap(true)
 
         if(this.canvas == null) {
             throw Error("canvas not found")
@@ -54,5 +63,9 @@ class DiscreteCanvas {
 
     render() {
         this.pixels.foreach(pixel => this.renderPixel(pixel))
+    }
+
+    clear() {
+        this.ctx.clearRect(0, 0, this.width, this.height);
     }
 }

@@ -10,10 +10,30 @@ class PriorityQueueElement extends Pair {
 }
 
 /**
- * This class implemented a binary heap, hence this is not an abstract class. */ 
+ * This is an abstract class for priority queue.
+ * Do not instantiate this class.
+ */
 class PriorityQueue {
-    constructor(reverse=false) {
+    constructor() {
         this.xs = []
+    } 
+
+    top() {}
+    peek() {}
+    insert() {}
+    remove() {}
+    update() {}
+    size() {}
+}
+
+
+class SortedList extends PriorityQueue {
+
+}
+
+class Heap extends PriorityQueue {
+    constructor(reverse=false) {
+        super()
         this.reverse = reverse
     }
 
@@ -73,10 +93,14 @@ class PriorityQueue {
     }
 
     foreach(func) {
+        if(this.empty()) return
+
+        let t = clone(this)
+
         do {
-            let e = this.top()
+            let e = t.top()
             func(e)
-        } while (!this.empty());
+        } while (!t.empty());
     }
 
     _bubbleUp(index) {

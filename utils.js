@@ -6,3 +6,7 @@ function clone(instance) {
         JSON.parse(JSON.stringify(instance)),
     );
 }
+
+function randint(max) {
+    return Math.floor(Math.random() * max);
+}

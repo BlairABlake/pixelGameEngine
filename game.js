@@ -25,12 +25,15 @@ class SampleGame extends Game {
      */
     constructor(canvas) {
         super(canvas)
-
-        this.canvas.setPixel(1, 1, 10, new Color("#000000"))
-        this.canvas.setPixel(2, 1, 10, new Color("#000000"))
-        this.canvas.setPixel(3, 1, 10, new Color("#000000"))
     }
 
     update() {
+        this.canvas.clearPixels()
+
+        for(let i=0; i < 100; i++) {
+            let x = randint(100)
+            let y = randint(100)
+            this.canvas.setPixel(x, y, 10, "#ffffff")
+        }
     }
 }

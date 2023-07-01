@@ -12,8 +12,9 @@ class PriorityQueueElement extends Pair {
 /**
  * This class implemented a binary heap, hence this is not an abstract class. */ 
 class PriorityQueue {
-    constructor() {
+    constructor(reverse=false) {
         this.xs = []
+        this.reverse = reverse
     }
 
     top() {
@@ -34,6 +35,7 @@ class PriorityQueue {
     }
 
     insert(element, priority) {
+        if(this.reverse) priority *= -1
         this.xs.push(new PriorityQueueElement(element, priority))
         this._bubbleUp(this.lastIndex())
     }

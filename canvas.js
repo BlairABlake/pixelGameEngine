@@ -32,7 +32,7 @@ class DiscreteCanvas {
         this.grid_height = grid_height
         this.width = this.canvas.width
         this.height = this.canvas.height
-        this.pixels = new PriorityQueue()
+        this.pixels = new PriorityQueue(true)
 
         if(this.canvas == null) {
             throw Error("canvas not found")

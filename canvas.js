@@ -65,7 +65,16 @@ class DiscreteCanvas extends Canvas {
         this.pixels.foreach(pixel => this.renderPixel(pixel))
     }
 
-    clear() {
+    clearCanvas() {
         this.ctx.clearRect(0, 0, this.width, this.height);
+    }
+
+    clearPixels() {
+        this.pixels = new Heap(true)
+    }
+
+    clear() {
+        this.clearCanvas()
+        this.clearPixels()
     }
 }

@@ -65,7 +65,7 @@ class PriorityQueue {
 
     /**
      * Caution, this doesn't return a priority queue
-     * @param {Function} func
+     * @param {Function} func function must accept two parameters, one for the element and another for its priority
      * @returns {Array} array of elements in priority queue after mapping
      */
     map(func) {
@@ -76,7 +76,7 @@ class PriorityQueue {
 
     /**
      * Caution, this doesn't return a priority queue
-     * @param {Function} func
+     * @param {Function} func function must accept two parameters, one for the element and another for its priority
      * @returns {Array} array of elements in priority queue after mapping and flattend
      */
     flatMap(func) {
@@ -127,6 +127,10 @@ class SortedList extends PriorityQueue {
         this.insert(element, newPriority)
     }
 
+
+    /**
+     * @param {Function} func function must accept two parameters, one for the element and another for its priority
+     */
     forEach(func) {
         this.xs.forEach(e => func(e.x, e.y))
     }
@@ -193,6 +197,9 @@ class Heap extends PriorityQueue {
         else this._pushDown(index)
     }
 
+    /**
+     * @param {Function} func function must accept two parameters, one for the element and another for its priority
+     */
     forEach(func) {
         let t = new Heap()
         t.xs = this.xs.slice(0)

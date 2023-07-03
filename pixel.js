@@ -1,4 +1,9 @@
 class Pixel extends Transformable {
+    /**
+     * 
+     * @param {Vec3D} origin 
+     * @param {Color} color 
+     */
     constructor(origin, color) {
         super()
         this.color = color
@@ -19,13 +24,13 @@ class Pixel extends Transformable {
 }
 
 /**
- * Container for bunch of pixels
- * Coorinates of pixels are relative to the origin
+ * Container for a bunch of pixels
+ * Coordinates of pixels are relative to the origin
  */
 class PixelGroup extends Transformable {
     /**
      * 
-     * @param {Vec2D} origin 
+     * @param {Vec3D} origin 
      * @param {Heap} objects
      */
     constructor(origin, objects) {

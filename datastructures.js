@@ -4,8 +4,30 @@ class Vec2D {
         this.y = y
     }
 
+    /**
+     * 
+     * @param {Vec2D} other 
+     * @returns new instance of Vec2D
+     */
     add(other) {
         return new Vec2D(this.x + other.x, this.y + other.y)
+    }
+}
+
+class Vec3D {
+    constructor(x, y, z) {
+        this.x = x
+        this.y = y
+        this.z = z
+    }
+
+    /**
+     * 
+     * @param {Vec3D} other 
+     * @returns new instantce of Vec3D
+     */
+    add(other) {
+        return new Vec3D(this.x + other.x, this.y + other.y, this.z + other.z)
     }
 }
 
@@ -42,9 +64,9 @@ class PriorityQueue {
     }
 
     /**
-     * 
+     * Caution, this doesn't return a priority queue
      * @param {Function} func
-     * @returns reference to this object
+     * @returns {Array} array of elements in priority queue after mapping
      */
     map(func) {
         if(this.empty()) return this
@@ -53,9 +75,9 @@ class PriorityQueue {
     }
 
     /**
-     * 
+     * Caution, this doesn't return a priority queue
      * @param {Function} func
-     * @returns 
+     * @returns {Array} array of elements in priority queue after mapping and flattend
      */
     flatMap(func) {
         if(this.empty()) return this
@@ -108,7 +130,6 @@ class SortedList extends PriorityQueue {
     forEach(func) {
         this.xs.forEach(e => func(e.x, e.y))
     }
-
 }
 
 class Heap extends PriorityQueue {

@@ -7,12 +7,13 @@ class PixelCanvas {
      * @param {number} id 
      * @param {number} grid_width 
      * @param {number} grid_height 
+     * @param {boolean} show_grid
      */
-    constructor(id, grid_width, grid_height) {
+    constructor(id, grid_size, show_grid) {
         this.canvas = document.getElementById(id)
-        this.ctx = this.canvas.getContext("2d");
-        this.grid_width = grid_width
-        this.grid_height = grid_height
+        this.ctx = this.canvas.getContext("2d")
+        this.grid_size = grid_size
+        this.show_grid = show_grid
         this.width = this.canvas.width
         this.height = this.canvas.height
 
@@ -27,19 +28,11 @@ class PixelCanvas {
      */
     renderPixel(pixel) {
         this.ctx.fillStyle = pixel.color.colorHex
-        this.ctx.fillRect(pixel.origin.x * this.grid_width, pixel.origin.y * this.grid_height, this.grid_width, this.grid_height)
+        this.ctx.fillRect(pixel.origin.x * this.grid_size, pixel.origin.y * this.grid_size, this.grid_size, this.grid_size)
     }
 
     clearRender() {
         this.ctx.clearRect(0, 0, this.width, this.height);
-    }
-
-    clearPixels() {
-        this.pixels = new Heap(true)
-    }
-
-    clearPixelGroups() {
-        this.pixelGroups = new Heap(true)
     }
 
     clear() {

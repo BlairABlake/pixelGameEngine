@@ -37,6 +37,10 @@ class Pixel extends Transformable {
         return this.origin.y
     }
 
+    get z() {
+        return this.origin.z
+    }
+
     translate(v) {
         return new Pixel(this.origin.add(v), this.color)
     }
@@ -61,10 +65,10 @@ class PixelGroup extends Transformable {
     /**
      * 
      * @param {Pixel|PixelGroup} v 
-     * @param {number} z 
+     * @returns {PixelGroup} return the reference to this object so you can chain methods
      */
-    add(v, z) {
-        this.objects.insert(v, z)
+    add(v) {
+        this.objects.insert(v, v.origin.z)
         return this
     }
 

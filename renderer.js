@@ -27,17 +27,22 @@ class PixelCanvas {
      * @param {Pixel} pixel 
      */
     renderPixel(pixel) {
+        pixel = this.clipPixel(pixel)
         this.ctx.fillStyle = pixel.color.colorHex
         this.ctx.fillRect(pixel.origin.x * this.grid_size, pixel.origin.y * this.grid_size, this.grid_size, this.grid_size)
     }
 
-    clearRender() {
-        this.ctx.clearRect(0, 0, this.width, this.height);
+    /**
+     * @param {Pixel} pixel
+     */
+    clipPixel(pixel) {
+        let origin = pixel.origin
+        pixel.origin = origin.add(new Vec3D((origin.x / this.grid_size) * -1, (origin.y / this.grid_size) * -1, origin.z))
+        return pixel
     }
 
     clear() {
-        this.clearCanvas()
-        this.clearPixels()
+        this.ctx.clearRect(0, 0, this.width, this.height);
     }
 }
 
@@ -70,7 +75,7 @@ class PixelRenderer {
      * 
      * @param {PixelGroup} pixelGroup 
      */
-    setPixelGroup(pixelGroup) {
+    addPixelGroup(pixelGroup) {
         this.pixelGroups.insert(pixelGroup, pixelGroup.origin.z)
     }
 
@@ -83,21 +88,18 @@ class PixelRenderer {
             })
         })
 
-        this.pixels.forEach((pixel, _) => {
-            this.canvas.renderPixel(pixel)
-            console.log(pixel)
-        })
+        this.pixels.forEach((pixel, _) => this.canvas.renderPixel(pixel))
     }
 
     clearPixels() {
-        this.canvas.clearPixels()
+        this.pixels = new Heap(true)
     }
 
     clearPixelGroups() {
-        this.canvas.clearPixelGroups()
+        this.pixelGroups = new Heap()
     }
 
-    clearRender() {
-        this.canvas.clearRender()
+    clearCanvas() {
+        this.canvas.clear()
     }
 }

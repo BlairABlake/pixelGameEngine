@@ -1,6 +1,6 @@
 /**
- * A Scene is a fundamental unit of view.
- * We can switch the scenes, but one canvas can only render one scene
+ * A Scene is a fundamental unit of a view.
+ * We can switch the scenes, but one canvas can render at most one scene
  */
 class Scene {
     /**

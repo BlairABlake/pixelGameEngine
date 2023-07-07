@@ -12,6 +12,10 @@ class Vec2D {
     add(other) {
         return new Vec2D(this.x + other.x, this.y + other.y)
     }
+
+    negate() {
+        return new Vec2D(this.x * -1, this.y * -1, this.z * -1)
+    }
 }
 
 class Vec3D {
@@ -27,6 +31,7 @@ class Vec3D {
      * @returns new instantce of Vec3D
      */
     add(other) {
+        if(other instanceof Vec2D) return new Vec3D(this.x + other.x, this.y + other.y, this.z)
         return new Vec3D(this.x + other.x, this.y + other.y, this.z + other.z)
     }
 }

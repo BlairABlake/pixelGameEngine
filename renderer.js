@@ -16,6 +16,8 @@ class PixelCanvas {
         this.show_grid = show_grid
         this.width = this.canvas.width
         this.height = this.canvas.height
+        this.ymax = Math.ceil(this.height / this.grid_size)
+        this.xmax = Math.ceil(this.width / this.width)
 
         if(this.canvas == null) {
             throw Error("canvas not found")
@@ -28,6 +30,8 @@ class PixelCanvas {
      */
     renderPixel(pixel) {
         pixel = this.clipPixel(pixel)
+        pixel = this.moveToCameraPerspective(pixel)
+        pixel.origin.y = this.ymax - pixel.origin.y - 1 //change canvas coordinate system to cartesian coorinate system,
         this.ctx.fillStyle = pixel.color.colorHex
         this.ctx.fillRect(pixel.origin.x * this.grid_size, pixel.origin.y * this.grid_size, this.grid_size, this.grid_size)
     }
@@ -39,6 +43,10 @@ class PixelCanvas {
         let origin = pixel.origin
         pixel.origin = origin.add(new Vec3D((origin.x / this.grid_size) * -1, (origin.y / this.grid_size) * -1, origin.z))
         return pixel
+    }
+
+    moveToCameraPerspective(pixel) {
+        return pixel.translate(Engine.Camera.center.negate())
     }
 
     clear() {
